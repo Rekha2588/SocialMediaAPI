@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const Marketplace = require('../models/marketPlaceModel');
 
 const addProvider = asyncHandler(async (req, res) => {
-    const {name, description} = req.body;
+    const { name, description } = req.body;
     if (!name) {
         res.status(400);
         throw new Error("Provider name is mandatory");
@@ -12,7 +12,7 @@ const addProvider = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Provider already exists!");
     }
-    const provider = await Marketplace.create({name, description});
+    const provider = await Marketplace.create({ name, description });
     if (provider) {
         res.status(201).json({
             _id: provider.id,
@@ -33,7 +33,7 @@ const getProviders = asyncHandler(async (req, res) => {
 
 const getProvider = asyncHandler(async (req, res) => {
     const provider = await Marketplace.findById(req.params.id);
-    if(!provider){
+    if (!provider) {
         res.status(404);
         throw new Error("provider not found");
     }
@@ -42,17 +42,17 @@ const getProvider = asyncHandler(async (req, res) => {
 
 const updateProvider = asyncHandler(async (req, res) => {
     const provider = await Marketplace.findById(req.params.id);
-    if(!provider){
+    if (!provider) {
         res.status(404);
         throw new Error("provider not found");
-    }    
+    }
     const updatedProvider = await Marketplace.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.status(200).json(updatedProvider);
 });
 
 const deleteProvider = asyncHandler(async (req, res) => {
     const provider = await Marketplace.findById(req.params.id);
-    if(!provider){
+    if (!provider) {
         res.status(404);
         throw new Error("Provider not found");
     }
@@ -62,4 +62,4 @@ const deleteProvider = asyncHandler(async (req, res) => {
     });
 });
 
-module.exports = {addProvider, getProviders, getProvider, updateProvider, deleteProvider};
+module.exports = { addProvider, getProviders, getProvider, updateProvider, deleteProvider };

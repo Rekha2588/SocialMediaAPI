@@ -1,28 +1,28 @@
 const mongoose = require('mongoose');
 
 const orderSchema = mongoose.Schema({
-    customerId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'UserDetails' 
+    customerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'UserDetails'
     },
-    orderDate: { 
-        type: Date, 
-        default: Date.now 
+    orderDate: {
+        type: Date,
+        default: Date.now
     },
-    deliveryDate: { 
-        type: Date 
+    deliveryDate: {
+        type: Date
     },
-    orderStatus: { 
-        type: String, 
-        enum: ['pending', 'confirmed','shipped', 'delivered', 'cancelled'] 
+    orderStatus: {
+        type: String,
+        enum: ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled']
     },
-    paymentMethod: { 
-        type: String, 
-        enum: ['credit', 'debit', 'bank transfer'] 
+    paymentMethod: {
+        type: String,
+        enum: ['credit', 'debit', 'bank transfer']
     },
-    totalCost: { 
-        type: Number, 
-        required: true 
+    totalCost: {
+        type: Number,
+        required: true
     },
     items: [
         {
@@ -31,7 +31,10 @@ const orderSchema = mongoose.Schema({
             price: { type: Number, required: true }
         }
     ]
-});
+},
+    {
+        timestamps: true
+    });
 
 
 const Orders = mongoose.model('Orders', orderSchema)

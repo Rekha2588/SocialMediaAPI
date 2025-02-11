@@ -82,7 +82,7 @@ const updateUser = asyncHandler(async (req, res) => {
     if (!user) {
         res.status(404);
         throw new Error("User not found");
-    }    
+    }
     if (req.params.id !== req.user._id) {
         res.status(403);
         throw new Error("You are not authorized to update other user's details");
@@ -116,7 +116,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 //Unlock user account
 const unlockUserAccount = asyncHandler(async (req, res) => {
-    const user = await UserDetails.findOne({ email: req.body.email }); 
+    const user = await UserDetails.findOne({ email: req.body.email });
     if (!user) {
         res.status(404);
         throw new Error("User not found");
@@ -131,7 +131,7 @@ const unlockUserAccount = asyncHandler(async (req, res) => {
 });
 
 const findUserById = asyncHandler(async (id) => {
-    return await UserDetails.findById(id);    
+    return await UserDetails.findById(id);
 });
 
 module.exports = { registerUser, loginUser, updateUser, deleteUser, unlockUserAccount }
